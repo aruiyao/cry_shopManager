@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/reset.css">
+
+  <script src="/3rd/jquery.js"></script>
+  <script src="/3rd/bootstrap.js"></script>
+  <script src="/3rd/angular-1.4.6.js"></script>
+  <script src="goodsDetail.js"></script>
+  <style>
+    .nav-tabs>li.active>a {
+      border: 1px solid #337ab7;
+      border-bottom-color: transparent;
+    }
+
+    .nav-tabs {
+      border-bottom: 1px solid #337ab7;
+    }
+
+    .nav-tabs > li.active > a:hover{
+      border: 1px solid #337ab7;
+      border-bottom-color: transparent;
+    }
+  </style>
+</head>
+
+<body ng-app="goodsDetailApp" ng-controller="goodsDetailCtrl" ng-init="init()" ng-cloak>
+  <div class="container" style="margin-bottom:100px;margin-top: 40px">
+    <div style="float: left;">
+      <img ng-src="{{downUrl + '?imageName=' + goods.mainPicture}}" style="width: 300px;height: 300px">
+    </div>
+    <div style="float: left;margin-left: 80px">
+      <div style="padding: 20px 20px 20px 0;font-size: 18px" ng-bind="goods.goodsName"></div>
+      <div style="background-color:#e8e8e8;padding: 20px">
+        <span>价格</span>
+        <span style="color: orange;font-size: 24px;font-weight: bold;margin-left: 50px">
+          <span>￥</span><span ng-bind="goods.goodsPrice"></span>
+        </span>
+      </div>
+      <div style='padding: 50px 20px 20px 0'>
+        <button class="btn btn-primary" style="font-size: 18px;padding: 6px 33px;" ng-click="buy()">立即购买</button>
+        <button class="btn" style="font-size: 18px;padding: 6px 33px;margin-left: 30px">返回</button>
+      </div>
+      <div>承诺&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7天无理由</div>
+    </div>
+    <div style="clear:both"></div>
+
+    <div style="margin-top: 30px">
+      <ul class="nav nav-tabs" style="font-size: 16px">
+        <li role="presentation" class="active"><a href="#">商品详情</a></li>
+        <!-- <li role="presentation"><a href="#">Profile</a></li> -->
+        <!-- <li role="presentation"><a href="#">Messages</a></li> -->
+      </ul>
+      <div style="padding: 10px" ng-repeat="item in detailPic">
+        <img ng-src="{{downUrl + '?imageName=' + item}}" style="width: 800px">
+      </div>
+
+
+    </div>
+  </div>
+</body>
+
+</html>

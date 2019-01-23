@@ -1,0 +1,8 @@
+[ng-cloak] {
+  display: none !important
+}
+
+.btn-letter {
+  letter-spacing: 14px;
+  text-indent: 14px;
+}
