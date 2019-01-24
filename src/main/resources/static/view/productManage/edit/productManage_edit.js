@@ -1,13 +1,42 @@
-var app = angular.module("productManageCreateApp", []);
-app.controller("productManageCreateCtrl", function($scope, $rootScope) {
+var app = angular.module("productManageEditApp", []);
+app.controller("productManageEditCtrl", function ($scope, $rootScope, $location) {
   $scope.mainPicture = "";
-  $scope.init = function() {
+  $scope.init = function () {
+    $scope.goodsID = $location.search().goodsID;
     $scope.downUrl = "/manage/uploadDownload/downloadImage";
     $scope.detailPicture = "";
     $scope.detailPicList = [];
+    $scope.queryGoodsDetail();
   }
+  $scope.queryGoodsDetail = function () {
+    $.ajax({
+      url: "/manage/queryGoodsDetail",
+      type: "GET",
+      contentType: "application/json",
+      data: {
+        id: $scope.goodsID,
+      },
+      // dataType: "json",
+      success: function (data) {
+        $rootScope.$apply(function () {
+          if (data.detailPicture) {
+            $scope.detailPicList = data.detailPicture.split("|");
+          } else {
+            $scope.detailPicList = [];
+          }
+          $scope.detailPicture = data.detailPicture;
+          $scope.mainPicture = data.mainPicture;
+          $scope.goodsName = data.goodsName;
+          $scope.goodsPrice = data.goodsPrice;
+          $scope.goodsStatus = data.goodsStatus;
+        })
+      },
+      error: function (data) {
 
-  $scope.uploadImage = function() {
+      }
+    })
+  }
+  $scope.uploadImage = function () {
     var uploadUrl = "/manage/uploadDownload/uploadImage";
     var pic = $('#upload_file')[0].files[0];
     var fd = new FormData();
@@ -21,20 +50,18 @@ app.controller("productManageCreateCtrl", function($scope, $rootScope) {
       cache: false,
       contentType: false,
       processData: false,
-      success: function(data) {
-        $rootScope.$apply(function() {
+      success: function (data) {
+        $rootScope.$apply(function () {
           console.log("the data is : {}", data);
           if (data !== "") {
             $scope.mainPicture = data;
-            console.log("上传成功后的文件路径为：" + data);
-            $scope.imgUrl = $scope.downUrl + "?imageName=" + data;
           }
         })
       }
     });
   }
 
-  $scope.uploadMultpie = function() {
+  $scope.uploadMultpie = function () {
     var uploadUrl = "/manage/uploadDownload/uploadMultpie";
     var fileList = [];
     var pics = $('#upload_file_multiple')[0];
@@ -42,7 +69,7 @@ app.controller("productManageCreateCtrl", function($scope, $rootScope) {
       fileList.push(pics.files[i]);
     }
     var formData = new FormData();
-    fileList.forEach(function(file) {
+    fileList.forEach(function (file) {
       formData.append('files', file, file.name);
     })
     $.ajax({
@@ -53,65 +80,60 @@ app.controller("productManageCreateCtrl", function($scope, $rootScope) {
       cache: false,
       contentType: false,
       processData: false,
-      success: function(data) {
-        $rootScope.$apply(function() {
+      success: function (data) {
+        $rootScope.$apply(function () {
+          $scope.detailPicList = [];
           if (data && data.length > 0) {
+            $scope.detailPicList = data;
             for (var i = 0; i < data.length; i++) {
               $scope.detailPicture = $scope.detailPicture + data[i] + "|";
-              $scope.detailPicList.push($scope.downUrl + "?imageName=" + data[i])
             }
-            $scope.detailPicture = $scope.detailPicture.substr(0, $scope.detailPicture.length - 1)
+            $scope.detailPicture = $scope.detailPicture.substr(0, $scope.detailPicture.length - 1);
           }
         })
       }
     });
   }
 
-  $scope.dateTimeFormate = function() {
-    var obj = {};
-    var d = new Date();
-    obj.year = d.getFullYear();
-    obj.month = ('0' + (d.getMonth() + 1)).slice(-2);
-    obj.day = ('0' + (d.getDate())).slice(-2);
-    obj.hour = ('0' + (d.getHours())).slice(-2);
-    obj.minutes = ('0' + (d.getMinutes())).slice(-2);
-    obj.seconds = ('0' + (d.getSeconds())).slice(-2);
-    return obj
-  }
-  $scope.create = function() {
-    var date = $scope.dateTimeFormate();
+  $scope.updateGoods = function () {
     var req = {
+      id: $scope.goodsID,
       goodsName: $scope.goodsName,
       goodsPrice: $scope.goodsPrice,
       mainPicture: $scope.mainPicture,
       detailPicture: $scope.detailPicture,
-      createTime: date.year + date.month + date.day + date.hour + date.minutes + date.seconds,
-      goodsStatus: 0
+      goodsStatus: $scope.goodsStatus
     }
     $.ajax({
-      url: "/manage/createGoods",
+      url: "/manage/updateGoods",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(req),
       // dataType: "json",
-      success: function(data) {
-        $rootScope.$apply(function() {
+      success: function (data) {
+        $rootScope.$apply(function () {
           $("#myModal").modal();
         })
       },
-      error: function(data) {
+      error: function (data) {
 
       }
     })
   }
-  $scope.detail = function(id) {
+  $scope.detail = function (id) {
     window.location.href = "/view/goods/detail/goodsDetail.html?goodsID=" + id;
   }
-  $scope.sure = function() {
+  $scope.sure = function () {
     window.location.href = "../list/productManage_list.html"
   }
-  $scope.cancle = function() {
+  $scope.cancle = function () {
     window.location.href = "../list/productManage_list.html"
   }
 })
 
+app.config(['$locationProvider', function ($locationProvider) {
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
+}]);

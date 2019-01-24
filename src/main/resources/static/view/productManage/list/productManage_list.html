@@ -9,7 +9,6 @@
 
   <link rel="stylesheet" href="/manage/css/bootstrap.css">
   <link rel="stylesheet" href="/manage/css/reset.css">
-  <link rel="stylesheet" href="/manage/css/login.css">
   <link rel="stylesheet" href="/manage/css/bootstrapValidator.css">
 
   <script src="/manage/3rd/jquery.js"></script>
@@ -37,18 +36,28 @@
     </div>
     <div> <button class="btn btn-default" ng-click="create()">+&nbsp;&nbsp;&nbsp;创建商品</button></div>
     <div style="padding-top: 30px">
-      <table class="table">
+      <table class="table" id="goodsTable">
         <thead>
           <th>商品编号</th>
           <th>商品名称</th>
           <th>创建时间</th>
+          <th>状态</th>
           <th>操作</th>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td style="vertical-align: middle"><span ng-bind="goods.goodsPrice"></span></td>
-            <td style="vertical-align: middle"><span ng-bind="goods.goodsPrice"></span></td>
+          <tr ng-repeat="item in goodsList">
+            <td ng-bind="item.id"></td>
+            <td><span ng-bind="item.goodsName"></span></td>
+            <td><span ng-bind="item.createTime|newdate"></span></td>
+            <td>
+              <ul>
+                <li><a href="" ng-click="detail(item.id)">查看</a></li>
+                <li><a href="" ng-click="edit(item.id)">编辑</a></li>
+                <li><a href="">删除</a></li>
+                <div style="clear: both;"></div>
+              </ul>
+
+            </td>
           </tr>
         </tbody>
       </table>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登录</title>
+  <link rel="stylesheet" href="/manage/css/bootstrap.css">
+  <link rel="stylesheet" href="/manage/css/reset.css">
+  <link rel="stylesheet" href="/manage/css/login.css">
+  <script src="/manage/3rd/jquery.js"></script>
+  <script src="/manage/3rd/bootstrap.js"></script>
+  <script src="/manage/3rd/angular-1.4.6.js"></script>
+  <script src="productManage_detail.js"></script>
+</head>
+
+<body ng-app="productManageDetailApp" ng-controller="productManageDetailCtrl" ng-init="init()">
+  <div style="padding: 0 50px">
+    <h3>商品详情</h3>
+    <div style="padding: 30px 0">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label for="goodsName" class="col-sm-2 control-label">商品名称</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="goodsName" placeholder="" ng-model="goods.goodsName" disabled="true">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mainPicture" class="col-sm-2 control-label">商品主图</label>
+          <div class="col-sm-5">
+            <img ng-src="{{downUrl + '?imageName=' + goods.mainPicture}}" style="width: 160px; height:160px;border: 1px solid #cccccc" ng-show="goods.mainPicture!='' && goods.mainPicture!=null">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="detailPicture" class="col-sm-2 control-label">详情图片</label>
+          <div class="col-sm-5">
+            <img ng-src="{{downUrl + '?imageName=' + item}}" style="width: 160px; height:160px;border: 1px solid #cccccc" ng-repeat="item in detailPic">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="goodsPrice" class="col-sm-2 control-label">商品价格</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="goodsPrice" disabled="true" ng-model="goods.goodsPrice">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-primary" ng-click="goBack()">返回</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

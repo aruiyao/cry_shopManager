@@ -19,4 +19,19 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.createGoods(req);
     }
 
+    @Override
+    public List < Goods > getGoodsList() {
+        return goodsMapper.getGoodsList();
+    }
+
+    @Override
+    public Goods queryGoodsDetail(Goods req) {
+        return goodsMapper.queryGoodsDetail(req);
+    }
+
+    @Override
+    public void updateGoods(Goods req) {
+        System.out.println(req);
+        goodsMapper.updateGoods(req);
+    }
 }

@@ -13,6 +13,9 @@ public class Goods {
 
     private String createTime;
 
+    /**商品状态 0:下架  1：上架*/
+    private String goodsStatus;
+
     public Integer getId() {
         return id;
     }
@@ -61,6 +64,14 @@ public class Goods {
         this.createTime = createTime;
     }
 
+    public String getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(String goodsStatus) {
+        this.goodsStatus = goodsStatus;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -76,6 +87,8 @@ public class Goods {
         builder.append(detailPicture);
         builder.append(", createTime=");
         builder.append(createTime);
+        builder.append(", goodsStatus=");
+        builder.append(goodsStatus);
         builder.append("]");
         return builder.toString();
     }

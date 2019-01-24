@@ -42,7 +42,6 @@ public class LoginControlle {
         HttpSession session = request.getSession();// 这就是session的创建
         session.setAttribute("userName", user.getUserName());
         session.setAttribute("id", user.getId());
-        System.out.println(request.getSession().getMaxInactiveInterval());
         return user;
     }
 

@@ -50,9 +50,8 @@ app.controller("indexCtrl", function ($scope, $rootScope) {
   $scope.chooseMenu = function (index) {
     $scope.menuIndex = index;
     $scope.pageUrl = $scope.menulist[index].url
-    
+    $("#iframepage").attr("src",$scope.pageUrl);
   }
-
 
   $scope.logout = function () {
     $.ajax({
