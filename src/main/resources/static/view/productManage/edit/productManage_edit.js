@@ -120,11 +120,8 @@ app.controller("productManageEditCtrl", function ($scope, $rootScope, $location)
       }
     })
   }
-  $scope.detail = function (id) {
-    window.location.href = "/view/goods/detail/goodsDetail.html?goodsID=" + id;
-  }
   $scope.sure = function () {
-    window.location.href = "../list/productManage_list.html"
+    $scope.queryGoodsDetail();
   }
   $scope.cancle = function () {
     window.location.href = "../list/productManage_list.html"

@@ -20,8 +20,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List < Goods > getGoodsList() {
-        return goodsMapper.getGoodsList();
+    public List < Goods > getGoodsList(Goods req) {
+        return goodsMapper.getGoodsList(req);
     }
 
     @Override
@@ -33,5 +33,10 @@ public class GoodsServiceImpl implements GoodsService {
     public void updateGoods(Goods req) {
         System.out.println(req);
         goodsMapper.updateGoods(req);
+    }
+
+    @Override
+    public void deleteGoods(Integer id) {
+        goodsMapper.deleteGoods(id);
     }
 }

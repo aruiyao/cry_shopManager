@@ -8,10 +8,12 @@ public interface GoodsService {
 
     void createGoods(Goods req);
 
-    List < Goods > getGoodsList();
+    List < Goods > getGoodsList(Goods req);
 
     Goods queryGoodsDetail(Goods req);
 
     void updateGoods(Goods req);
 
+    void deleteGoods(Integer id);
+    
 }

@@ -21,6 +21,8 @@ public class Order {
 
     private String totalPrice;
 
+    private String createTime;
+
     public Integer getId() {
         return id;
     }
@@ -101,6 +103,14 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -124,6 +134,8 @@ public class Order {
         builder.append(number);
         builder.append(", totalPrice=");
         builder.append(totalPrice);
+        builder.append(", createTime=");
+        builder.append(createTime);
         builder.append("]");
         return builder.toString();
     }

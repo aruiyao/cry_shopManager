@@ -18,7 +18,7 @@
 </head>
 
 <body ng-app="productManageEditApp" ng-controller="productManageEditCtrl" ng-init="init()">
-  <div style="padding: 0 50px">
+  <div style="padding: 0 50px 100px 50px">
     <h3>创建商品</h3>
     <div style="padding: 30px 0">
       <div class="form-horizontal">
@@ -78,7 +78,7 @@
           </div>
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-            <button type="button" class="btn btn-primary" ng-click="sure()">确认</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" ng-click="sure()">确认</button>
           </div>
         </div>
       </div>

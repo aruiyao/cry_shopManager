@@ -4,7 +4,7 @@ app.controller("indexCtrl", function ($scope, $rootScope) {
   $scope.changeFrameHeight = function () {
     var ifm = document.getElementById("iframepage");
     ifm.height = document.documentElement.clientHeight;
-    ifm.width = document.documentElement.clientWidth - 200;
+    ifm.width = document.documentElement.clientWidth - 202;
   }
 
   window.onresize = function () {
@@ -14,16 +14,12 @@ app.controller("indexCtrl", function ($scope, $rootScope) {
     $scope.userName = "";
     $scope.pageUrl = "../userManage/list/userManage_list.html";
     $scope.menulist = [{
-        "name": "用户管理",
-        "url": "../userManage/list/userManage_list.html"
-      },
-      {
         "name": "商品管理",
         "url": "../productManage/list/productManage_list.html"
       },
       {
         "name": "订单管理",
-        "url": ""
+        "url": "../orderManage/list/orderManage_list.html"
       },
     ]
     $scope.chooseMenu(0);
@@ -50,7 +46,7 @@ app.controller("indexCtrl", function ($scope, $rootScope) {
   $scope.chooseMenu = function (index) {
     $scope.menuIndex = index;
     $scope.pageUrl = $scope.menulist[index].url
-    $("#iframepage").attr("src",$scope.pageUrl);
+    $("#iframepage").attr("src", $scope.pageUrl);
   }
 
   $scope.logout = function () {

@@ -26,9 +26,9 @@ public class GoodsController {
 
     @GetMapping(value = "/getGoodsList")
     @ResponseBody
-    public GetGoodsListResponse getGoodsList() {
+    public GetGoodsListResponse getGoodsList(Goods req) {
         GetGoodsListResponse rsp = new GetGoodsListResponse();
-        List < Goods > goodsList = goodsService.getGoodsList();
+        List < Goods > goodsList = goodsService.getGoodsList(req);
         rsp.setGoodsList(goodsList);
         return rsp;
     }
@@ -44,5 +44,11 @@ public class GoodsController {
     @ResponseBody
     public void updateGoods(@RequestBody Goods req) {
         goodsService.updateGoods(req);
+    }
+    
+    @PostMapping(value = "/deleteGoods")
+    @ResponseBody
+    public void deleteGoods(@RequestBody Integer id) {
+        goodsService.deleteGoods(id);
     }
 }
